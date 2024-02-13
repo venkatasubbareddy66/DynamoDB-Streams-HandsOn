@@ -1,0 +1,53 @@
+DynamoDb Streams : it is an ordered flow of information anout changes  items in a DynamoDb table. When u enable stream on a table , DynamoDb captures information about every modification to data items n the table 
+
+-- Capture item-level changes in your table, and push the changes to a DynamoDB stream. You then can access the change information through the DynamoDB Streams API.
+
+Stream Records can be used for 
+
+-- Kinesis Data Streams/Client library 
+-- AWS Lambda
+--Data is retined for 24 hrs 
+
+
+Uses For : 
+
+-- Analytics purpose
+-- Cross Region replication
+-- Real time changes
+
+Step 1 : create DynamoDb table
+
+-- create table and give partiton key
+
+-- once u create table , add some items into the table
+
+-- go to table --> exports and streams --> turn on DynamoDB stream --> New and old images --> Turn on streams 
+
+
+Step 2 : create lambda function 
+
+--  in the same page , choose create trigger
+
+-- create new function --> Use Blue print --> search for DynamoDB and select Process updates made to table with python --> give function name --> choose create a new role --> give DynamoDb details in trigger section --> create function
+
+-- once ur function got created , u will get some error 
+
+--  function --> configuration --> permissions --> c.o role --> attach permissions (policies) --> DynamoDBfullaccess --> do refresh the screen the error will disappear
+
+-- ince ur  function is created go back to the trigger page in DynamoDB table add this function with batch size is 100 for this eg 
+
+
+Step 3 : Test 
+
+-- go back to the DynamoDB table and update and add some items into the table 
+
+-- do some chganges as you want 
+
+-- the changes will trigger to our lambda function '
+
+-- now go to function --> monitor--> view cloudwatch logs --> now you will able to see all the changes , INSERT,UPDATE,DELETE all the modifications that are captured through the DynamoDB Stream APi and trigger through the lambda and you will able to see in the cloud watch logs what has modification occurs 
+
+
+
+=======================================DONE===========================================
+
